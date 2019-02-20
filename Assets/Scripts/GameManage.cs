@@ -28,7 +28,7 @@ public class GameManage : MonoBehaviour
         }
         else
         {
-            print("You've one the game");
+            print("You've won the game");
         }
     }
 }
