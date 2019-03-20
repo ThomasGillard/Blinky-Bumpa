@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     public string startDirection;
 
     private Vector2 direction;
+    private Vector2 bounceDirection;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private bool isPink;
     private bool started;
+    private bool bounce;
 
     private Vector2 north = new Vector2(0f, 1f);
     private Vector2 east = new Vector2(1f, 0f);
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
         sr.color = Color.magenta;
         isPink = true;
         started = false;
+        bounce = false;
         spawn = this.transform.position;
     }
 
@@ -84,6 +87,14 @@ public class Player : MonoBehaviour
         if (started)
         {
             rb.MovePosition(rb.position + (direction * speed) * Time.deltaTime);
+
+            //bounce off the walls
+            if (bounce)
+            {
+                rb.MovePosition(rb.position + bounceDirection / 5);
+                print("bounce");
+                bounce = false;
+            }
         }
     }
 
@@ -103,7 +114,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //Switches the colour and behaviour on fire.
+    //Switches the colour and turn behaviour on fire.
     private void Switch()
     {
         if(isPink){
@@ -117,25 +128,31 @@ public class Player : MonoBehaviour
         }
     }
 
-    //On collision with a wall, change direction depending on the current colour
+    //On collision with a wall, change the direction of movement depending on the player's current colour
     private void Bump()
     {
+        bounce = true;
+   
         if (isPink)
         {
             if(direction == north)
             {
+                bounceDirection = south;
                 direction = east;
             }
             else if(direction == east)
             {
+                bounceDirection = west;
                 direction = south;
             }
             else if(direction == south)
             {
+                bounceDirection = north;
                 direction = west;
             }
             else
             {
+                bounceDirection = east;
                 direction = north;
             }
         }
@@ -143,21 +160,26 @@ public class Player : MonoBehaviour
         {
             if (direction == north)
             {
+                bounceDirection = south;
                 direction = west;
             }
             else if (direction == east)
             {
+                bounceDirection = west;
                 direction = north;
             }
             else if (direction == south)
             {
+                bounceDirection = north;
                 direction = east;
             }
             else
             {
+                bounceDirection = east;
                 direction = south;
             }
         }
         
     }
+
 }
