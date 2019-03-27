@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Vector2 bounceDirection;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private AudioSource audio;
     private bool isPink;
     private bool started;
     private bool bounce;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        audio = GetComponent<AudioSource>();
 
         switch (startDirection)
         {
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
             if (bounce)
             {
                 rb.MovePosition(rb.position + bounceDirection / 5);
-                print("bounce");
+                
                 bounce = false;
             }
         }
@@ -132,7 +134,9 @@ public class Player : MonoBehaviour
     private void Bump()
     {
         bounce = true;
-   
+        audio.Play();
+        
+
         if (isPink)
         {
             if(direction == north)
