@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour
         }
 
         //Respawns on out of bounds The boundaries are currently hardcoded and may need to change
-        if (this.transform.position.y > 5.5 || this.transform.position.y < -5.5 || this.transform.position.x > 7.5 || this.transform.position.x < -7.5)
+        if (this.transform.position.y > 6 || this.transform.position.y < -6 || this.transform.position.x > 10 || this.transform.position.x < -10)
         {
 
             transform.position = spawn;

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManage : MonoBehaviour
 {
-    private static int currentLevel = 0;
+    private static int currentLevel = 1;
 
     // Start is called before the first frame update
     void Start()
